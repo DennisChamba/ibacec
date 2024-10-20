@@ -67,13 +67,19 @@ with pdfplumber.open(pdf_path) as pdf:
                 
                 # Almacenar las filas en la lista correspondiente según la sección
                 if current_section == "EQUIPOS":
-                    equipos_data.append(row)
+                    if len(row[0]) != 0 and row[0] not in (existing_row[0] for existing_row in equipos_data) :
+                        equipos_data.append(row)
+
+
                 elif current_section == "MANO DE OBRA":
-                    mano_obra_data.append(row)
+                    if len(row[0]) != 0 and row[0] not in (existing_row[0] for existing_row in mano_obra_data) :
+                        mano_obra_data.append(row)
                 elif current_section == "MATERIALES":
-                    materiales_data.append(row)
+                    if len(row[0]) != 0 and row[0] not in (existing_row[0] for existing_row in materiales_data) :
+                        materiales_data.append(row)
                 elif current_section == "TRANSPORTE":
-                    transporte_data.append(row)
+                    if len(row[0]) != 0 and row[0] not in (existing_row[0] for existing_row in transporte_data) :
+                        transporte_data.append(row)
 
 # Convertir cada lista de datos en un DataFrame
 equipos_df = pd.DataFrame(equipos_data)
